@@ -27,7 +27,7 @@ int main(void)
     {
         write(1, "$ ", 2);
         op = getline(&buffer, &len, stdin);
-        if (op == -1)
+        if (op == -1) /* This shit is crazy*/
         {
             free(buffer);
             exit(0);
