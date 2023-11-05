@@ -1,10 +1,12 @@
 #include "main.h"
 
-
-
+/*
+	buffer = "/bin   /ls            -ls" 
+*/
+extern char **environ;
 int main(void)
 {
-	char *buffer = NULL, **s, *env[]={"HOME=/home/user", "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin", NULL};
+	char *buffer = NULL, **s;
 	size_t len = 0;
 	int get_line, status, count = 0;
 	pid_t child_p;
@@ -13,7 +15,7 @@ int main(void)
 	while (1)
 	{
 		write(STDOUT_FILENO, "#cisfun$ ", 9);
-		get_line = getline(&buffer, &len, stdin);
+		get_line = getline(&buffer, &len, stdin);/*Buffer allocated*/
 		count++;
 		if (get_line == -1)
 		{
@@ -28,6 +30,7 @@ int main(void)
 		if (stat(s[0], &st) == -1)
 		{
 			printf("#cisfun$: %d: %s: not found\n", count, buffer);
+			free_grid(s);/*if user input is not a valid cmd it should free then skip*/
 			continue;
 		}
 		child_p = fork();
@@ -35,10 +38,8 @@ int main(void)
 			wait(&status);
 		else if (child_p == 0)
 		{
-
-			if (execve(s[0], s, env) == -1)
+			if (execve(s[0], s, environ) == -1)
 			{
-				
 				/*perror(buffer);*/
 				/*printf("#cisfun$: %d: %s: not found\n", count, buffer);*/
 				printf("wa lbhlawan\n");

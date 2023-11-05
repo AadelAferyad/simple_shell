@@ -15,10 +15,20 @@ void free_grid(char **s)
 
 	if (!s)
 		return;
-	while (s[i])
-	{
+	for (;s[i]; i++)
 		free(s[i]);
-		i++;
-	}
 	free(s);
+}
+void skip_space_buffer(char **buffer)
+{
+	int i = 0, offsit = 0;
+
+	/*two cases : "    /bin/ls ||/bin      /ls"
+		"  /bin/ls" == [' ', ' ', ' ', '/', 'b', 'i', 'n', '/', '/', 'l', 's']
+	*/
+
+	while (buffer[i])
+	{
+		
+	}
 }
