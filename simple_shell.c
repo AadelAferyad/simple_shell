@@ -29,7 +29,8 @@ int main(void)
 		s = allocate_argv_and_set(buffer);
 		if (stat(s[0], &st) == -1)
 		{
-			printf("#cisfun$: %d: %s: not found\n", count, buffer);
+			/*printf("#cisfun$: %d: %s: not found\n", count, buffer);*/
+			berror(count, buffer);
 			free_grid(s);/*if user input is not a valid cmd it should free then skip*/
 			continue;
 		}

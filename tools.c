@@ -19,16 +19,3 @@ void free_grid(char **s)
 		free(s[i]);
 	free(s);
 }
-void skip_space_buffer(char **buffer)
-{
-	int i = 0, offsit = 0;
-
-	/*two cases : "    /bin/ls ||/bin      /ls"
-		"  /bin/ls" == [' ', ' ', ' ', '/', 'b', 'i', 'n', '/', '/', 'l', 's']
-	*/
-
-	while (buffer[i])
-	{
-		
-	}
-}

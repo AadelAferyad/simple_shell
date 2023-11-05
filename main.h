@@ -22,5 +22,8 @@ char **allocate_argv_and_set(char *buffer);
   execve functions
 */
 void free_grid(char **s);
+void _putchar(char c);
+void print_int(unsigned int n);
+void berror(int count, char *buffer);
 
 #endif
