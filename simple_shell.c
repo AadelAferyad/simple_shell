@@ -14,14 +14,14 @@ int main(void)
 
 	while (1)
 	{
-		write(STDOUT_FILENO, "#cisfun$ ", 9);
+		write(0, "#cisfun$ ", 9);
 		get_line = getline(&buffer, &len, stdin);/*Buffer allocated*/
 		count++;
 		if (get_line == -1)
 		{
 			free(buffer);
-			write(1, "\n", 1);
-			exit(EXIT_FAILURE);
+			write(0, "\n", 1);
+			exit(0);
 		}
 		if (buffer[0] == '\n')
 			continue;
@@ -43,7 +43,7 @@ int main(void)
 			{
 				/*perror(buffer);*/
 				/*printf("#cisfun$: %d: %s: not found\n", count, buffer);*/
-				printf("wa lbhlawan\n");
+				/*printf("wa lbhlawan\n");*/
 				free(buffer);
 				exit(2);
 			}
