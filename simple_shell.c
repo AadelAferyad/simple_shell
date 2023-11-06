@@ -26,14 +26,24 @@ int main(void)
 		if (buffer[0] == '\n')
 			continue;
 		buffer[get_line - 1] = '\0';
+		if (_strcmp(buffer, "exit"))
+		{
+			free(buffer);
+			break;
+		}
 		s = allocate_argv_and_set(buffer);
 		if (stat(s[0], &st) == -1)
 		{
-			/*printf("#cisfun$: %d: %s: not found\n", count, buffer);*/
-			berror(count, buffer);
-			free_grid(s);/*if user input is not a valid cmd it should free then skip*/
-			continue;
+			s[0] = concat_bin(&s[0]);
+			if (stat(s[0], &st) == -1)
+			{
+
+				berror(count, buffer);
+				free_grid(s);/*if user input is not a valid cmd it should free then skip*/
+				continue;
+			}	
 		}
+
 		child_p = fork();
 		if (child_p)
 			wait(&status);
@@ -41,8 +51,6 @@ int main(void)
 		{
 			if (execve(s[0], s, environ) == -1)
 			{
-				/*perror(buffer);*/
-				/*printf("#cisfun$: %d: %s: not found\n", count, buffer);*/
 				/*printf("wa lbhlawan\n");*/
 				free(buffer);
 				exit(2);

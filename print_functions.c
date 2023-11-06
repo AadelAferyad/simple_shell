@@ -1,5 +1,15 @@
 #include "main.h"
 
+
+int _strlen(char *str)
+{
+	int len = 0;
+
+	while (str[len])
+		len++;
+	return (len);
+}
+
 void print_int(unsigned int n)
 {
     if (n / 10)/*103 10 1  = 103*/
@@ -9,9 +19,9 @@ void print_int(unsigned int n)
 
 void _putchar(char c)
 {
-    write(1, &c, 1);
+    write(2, &c, 1);
 }
-
+/*BE AWARE CHANGED STDOUT TO STDERR*/
 void _puts(char *str)
 {
     int i;
@@ -20,12 +30,12 @@ void _puts(char *str)
         _putchar(str[i]);
 }
 
-
 void berror(int count, char *buffer)
 {
-    _puts("#cisfun$: ");
-    print_int(count);
-    _puts(": ");
-    _puts(buffer);
-    _puts(": not found\n");
+	_puts("#cisfun$: ");
+	print_int(count);
+	_puts(": ");
+	_puts(buffer);
+	_puts(": not found\n");
 }
+
