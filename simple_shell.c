@@ -1,9 +1,5 @@
 #include "main.h"
 
-/*
-	buffer = "/bin   /ls            -ls" 
-*/
-extern char **environ;
 int main(void)
 {
 	char *buffer = NULL, **s;
@@ -15,7 +11,7 @@ int main(void)
 	while (1)
 	{
 		write(0, "#cisfun$ ", 9);
-		get_line = getline(&buffer, &len, stdin);/*Buffer allocated*/
+		get_line = getline(&buffer, &len, stdin);
 		count++;
 		if (get_line == -1)
 		{
@@ -34,16 +30,14 @@ int main(void)
 		s = allocate_argv_and_set(buffer);
 		if (stat(s[0], &st) == -1)
 		{
-			s[0] = concat_bin(&s[0]);
+			s[0] = _getp(s[0]);
 			if (stat(s[0], &st) == -1)
 			{
-
 				berror(count, buffer);
-				free_grid(s);/*if user input is not a valid cmd it should free then skip*/
+				free_grid(s);
 				continue;
-			}	
+			}
 		}
-
 		child_p = fork();
 		if (child_p)
 			wait(&status);
@@ -51,7 +45,7 @@ int main(void)
 		{
 			if (execve(s[0], s, environ) == -1)
 			{
-				/*printf("wa lbhlawan\n");*/
+				perror("execve");
 				free(buffer);
 				exit(2);
 			}
