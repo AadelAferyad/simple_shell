@@ -42,8 +42,8 @@ int main(void)
 			s[0] = real_path(&s[0]);
 			if (s[0] == NULL)
 			{
-				berror(count, buffer);
 				free_grid(s);/*if user input is not a valid cmd it should free then skip*/
+				berror(count, buffer);
 				continue;
 			}	
 		}

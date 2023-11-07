@@ -28,3 +28,19 @@ int _strcmp_echo(char *dest)
 }
 
 
+char *_strdup(char *buffer)
+{
+	char *new;
+	int i = 0, len;
+
+	if (!buffer)
+		return (NULL);
+	len = _strlen(buffer);	
+	new = malloc(len + 1);
+	if (!new)
+		return (NULL);
+	for (;i < len; i++)
+		new[i] = buffer[i];
+	new[i] = '\0';
+	return (new);
+}

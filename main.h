@@ -11,29 +11,34 @@
 
 extern char **environ;
 /*========================== Memory functions ============================*/
-char *cut_the_first_word(char *buffer);
-char **allocate_argv_and_set(char *buffer);
-char *concat_bin(char **buffer);
-void free_grid(char **s);
-char *alloc_words_echo(char *buffer, int *index_buffer);
 int count_words_echo(char *buffer);
-char *skip_space_tab_for_berror(char *buffer);
+char *alloc_words_echo(char *buffer, int *index_buffer);
+int count_words(char *buffer);
+char *alloc_words_buffer(char *buffer, int *index_buffer);
+char **allocate_argv_and_set(char *buffer);
+void free_grid(char **s);
+
+char *cut_the_first_word(char *buffer);
+
+
 /*======================= End of memory functions ========================*/
 
 /*============================ STR functions =============================*/
-void _putchar(char c);
-void _puts(char *str);
-void print_int(unsigned int n);
-int _strlen(char *str);
 void berror(int count, char *buffer);
+char *skip_space_tab_for_berror(char *buffer);
 int _strcmp(char *src, char *dest);
 int _strcmp_echo(char *dest);
 char *_strdup(char *buffer);
-char **allocate(char *buffer);
-int count_words(char *buffer);
-int is_path();
-char *_getenvi();
-char *real_path(char **buffer);
+int _strlen(char *str);
+void print_int(unsigned int n);
+void _putchar(char c);
+void _puts(char *str);
 /*======================== End of STR functions ==========================*/
+
+/*============================ path functions =============================*/
+char *real_path(char **buffer);
+char *_getenvi();
+/*======================== End of path functions ==========================*/
+
 
 #endif
