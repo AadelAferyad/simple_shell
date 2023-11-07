@@ -3,7 +3,7 @@
 
 function func () {
     echo -e "\e[31m$1\e[0m"
-    ./automated_checker/checker ./shell ./automated_checker/tests/simple_shell_0.3/$1
+    ./automated_checker/checker ./shell ./automated_checker/tests/simple_shell_0.1/$1
     echo
     echo "================================================================ ============================================================================================="
     echo "================================================================ ============================================================================================="
@@ -11,5 +11,5 @@ function func () {
     echo "================================================================ ============================================================================================="
 }
 
-for i in $(ls automated_checker/tests/simple_shell_0.3/); do func $i ;done
+for i in $(ls automated_checker/tests/simple_shell_0.1/); do func $i ;done
 
