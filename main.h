@@ -9,7 +9,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-
+extern char **environ;
 /*========================== Memory functions ============================*/
 char *cut_the_first_word(char *buffer);
 char **allocate_argv_and_set(char *buffer);
@@ -31,6 +31,9 @@ int _strcmp_echo(char *dest);
 char *_strdup(char *buffer);
 char **allocate(char *buffer);
 int count_words(char *buffer);
+int is_path();
+char *_getenvi();
+char *real_path(char **buffer);
 /*======================== End of STR functions ==========================*/
 
 #endif

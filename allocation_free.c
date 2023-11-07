@@ -74,27 +74,7 @@ char **allocate_argv_and_set(char *buffer)
 	return (s);
 }
 
-char *concat_bin(char **buffer)
-{
-	int len, i;
-	char *n;
 
-	if (!buffer || !(*buffer))
-		return (NULL);
-	len = _strlen(*buffer);
-	n = malloc(len + 6);
-	if (!n)
-		return (NULL);
-	n[0] = '/', n[1] = 'b';
-	n[2] = 'i', n[3] = 'n';
-	n[4] = '/';
-
-	for (i = 0; i < len; i++)
-		n[i + 5] = (*buffer)[i];
-	n[i + 5] = '\0';
-	free(*buffer);
-	return (n);
-}
 
 void free_grid(char **s)
 {

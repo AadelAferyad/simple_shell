@@ -3,7 +3,7 @@
 /*
 	buffer = "/bin   /ls            -ls" 
 */
-extern char **environ;
+
 int main(void)
 {
 	char *buffer = NULL, **s;
@@ -32,13 +32,16 @@ int main(void)
 			free(buffer);
 			break;
 		}
-		s = allocate_argv_and_set(buffer);
+		if (!(s = allocate_argv_and_set(buffer)))
+		{
+			free(buffer);
+			break;
+		}	
 		if (stat(s[0], &st) == -1)
 		{
-			s[0] = concat_bin(&s[0]);
-			if (stat(s[0], &st) == -1)
+			s[0] = real_path(&s[0]);
+			if (s[0] == NULL)
 			{
-
 				berror(count, buffer);
 				free_grid(s);/*if user input is not a valid cmd it should free then skip*/
 				continue;
