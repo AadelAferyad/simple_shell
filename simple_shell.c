@@ -4,13 +4,13 @@ int main(void)
 {
 	char *buffer = NULL, **s;
 	size_t len = 0;
-	int get_line, status, count = 0;
+	int get_line, status, count = 0, is;
 	pid_t child_p;
 	struct stat st;
 
 	while (1)
 	{
-		write(0, "#cisfun$ ", 9);
+		write(0, "#cisfun$ ", 9), is = 0;
 		get_line = getline(&buffer, &len, stdin); /*Buffer allocated*/
 		count++;
 		if (get_line == -1)
@@ -35,11 +35,11 @@ int main(void)
 		}
 		if (stat(s[0], &st) == -1)
 		{
-			s[0] = real_path(&s[0]);
-			if (s[0] == NULL)
+			s[0] = real_path(&s[0], &is);
+			if (is)
 			{
-				free_grid(s); /*if user input is not a valid cmd it should free then skip*/
 				berror(count, buffer);
+				free_grid(s); /*if user input is not a valid cmd it should free then skip*/
 				continue;
 			}
 		}

@@ -18,7 +18,6 @@ char *alloc_words_buffer(char *buffer, int *index_buffer);
 char **allocate_argv_and_set(char *buffer);
 char *cut_the_first_word(char *buffer);
 void free_grid(char **s);
-
 /*======================= End of memory functions ========================*/
 
 /*============================ STR functions =============================*/
@@ -38,7 +37,7 @@ void print_int(unsigned int n);
 /*======================== End of STR functions ==========================*/
 
 /*============================ path functions =============================*/
-char *real_path(char **buffer);
+char *real_path(char **buffer, int *faild);
 char *_getenvi();
 void print_env(void);
 /*======================== End of path functions ==========================*/

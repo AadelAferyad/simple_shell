@@ -1,30 +1,33 @@
 #include "main.h"
 
-char *real_path(char **buffer)
+char *real_path(char **buffer, int *faild)
 {
 	char *tok, *path, *brutforce;
 	int found = 0, len;
-	struct stat tv;
 
 	if (!buffer || !(*buffer))
 		return (NULL);
 	path = _getenvi();
 	if (!path)
-		return (NULL);
+	{
+		*faild = 1;
+		return (*buffer);
+	}
 	tok = _strtok(path, ":");
-	len = _strlen(*buffer);
+	len = _strlen(*buffer);/*"ls/"*/
 	while (tok)
 	{
 		brutforce = malloc(len + 2 + _strlen(tok));
 		if (!brutforce)
 		{
 			free(path);
-			return (NULL);
+			return (*buffer);
+			*faild = 1;
 		}
 		_strcpy(brutforce, tok);
 		_strcat(brutforce, "/");
 		_strcat(brutforce, *buffer);
-		if (stat(brutforce, &tv) != -1)
+		if (access(brutforce, X_OK) == 0)
 			found = 1;
 		if (found)
 		{
@@ -36,8 +39,8 @@ char *real_path(char **buffer)
 		tok = _strtok(NULL, ":");
 	}
 	free(path);
-	free(*buffer);
-	return (NULL);
+	*faild = 1;
+	return (*buffer);
 }
 
 char *_getenvi()
