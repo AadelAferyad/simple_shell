@@ -1,9 +1,5 @@
 #include "main.h"
 
-/*
-	buffer = "/bin   /ls            -ls" 
-*/
-
 int main(void)
 {
 	char *buffer = NULL, **s;
@@ -15,7 +11,7 @@ int main(void)
 	while (1)
 	{
 		write(0, "#cisfun$ ", 9);
-		get_line = getline(&buffer, &len, stdin);/*Buffer allocated*/
+		get_line = getline(&buffer, &len, stdin); /*Buffer allocated*/
 		count++;
 		if (get_line == -1)
 		{
@@ -36,16 +32,16 @@ int main(void)
 		{
 			free(buffer);
 			break;
-		}	
+		}
 		if (stat(s[0], &st) == -1)
 		{
 			s[0] = real_path(&s[0]);
 			if (s[0] == NULL)
 			{
-				free_grid(s);/*if user input is not a valid cmd it should free then skip*/
+				free_grid(s); /*if user input is not a valid cmd it should free then skip*/
 				berror(count, buffer);
 				continue;
-			}	
+			}
 		}
 
 		child_p = fork();
