@@ -38,14 +38,24 @@ char *alloc_words_buffer(char *buffer, int *index_buffer)
 	s[j] = '\0';
 	return (s);
 }
-char **allocate_argv_and_set(char *buffer)
+char **allocate_argv_and_set(char *buffer, int *f)
 {
 	char **s;
 	int len = count_words(buffer), i = 0, j = 0, k = 0; /*"echo "    ""*/
 
+	if (len == 0)
+	{
+		if (f)
+			*f = 0;
+		return (NULL);
+	}
 	s = malloc(sizeof(char *) * (len + 1));
 	if (!s)
+	{
+		if (f)
+			*f = 1;
 		return (NULL);
+	}
 	while (i < len)
 	{
 		while (buffer[j]) /*"echo "    "\0"*/
@@ -61,6 +71,8 @@ char **allocate_argv_and_set(char *buffer)
 						k++;
 					}
 					free(s);
+					if (f)
+						*f = 1;
 					return (NULL);
 				}
 				break;

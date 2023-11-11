@@ -10,7 +10,8 @@ char *real_path(char **buffer, int *faild)
 	path = _getenvi();
 	if (!path)
 	{
-		*faild = 1;
+		if (faild)
+			*faild = 1;
 		return (*buffer);
 	}
 	tok = _strtok(path, ":");
@@ -21,8 +22,9 @@ char *real_path(char **buffer, int *faild)
 		if (!brutforce)
 		{
 			free(path);
-			return (*buffer);
-			*faild = 1;
+			if (faild)
+				*faild = 1;
+			exit(EXIT_FAILURE);
 		}
 		_strcpy(brutforce, tok);
 		_strcat(brutforce, "/");
@@ -39,7 +41,8 @@ char *real_path(char **buffer, int *faild)
 		tok = _strtok(NULL, ":");
 	}
 	free(path);
-	*faild = 1;
+	if (faild)
+		*faild = 1;
 	return (*buffer);
 }
 
@@ -58,6 +61,12 @@ char *_getenvi()
 		{
 			envvalue = _strtok(NULL, "\n");
 			sdup = _strdup(envvalue);
+			if (sdup[0] == '\0')
+			{
+				free(tmp);
+				free(sdup);
+				return(NULL);
+			}
 			free(tmp);
 			return (sdup);
 		}

@@ -29,16 +29,19 @@ void _puts(char *str)
 		_putchar(str[i]);
 }
 
-void berror(int count, char *buffer)
+int berror(int count, char *buffer, char *av)
 {
 	char *tmp = skip_space_tab_for_berror(buffer);
 
 	if (!tmp)
-		return;
-	_puts("#cisfun$: ");
+		return (1);
+	_puts(av);
+	_puts(": ");
 	print_int(count);
 	_puts(": ");
 	_puts(tmp);
 	_puts(": not found\n");
+	/*write(0, "\n", 1);*/
 	free(tmp);
+	return (0);
 }
