@@ -21,7 +21,7 @@ char *real_path(char **buffer, int *faild)
 		return (*buffer);
 	}
 	tok = _strtok(path, ":");
-	len = _strlen(*buffer);/*"ls/"*/
+	len = _strlen(*buffer); /*"ls/"*/
 	while (tok)
 	{
 		brutforce = malloc(len + 2 + _strlen(tok));
@@ -77,7 +77,7 @@ char *_getenvi()
 			{
 				free(tmp);
 				free(sdup);
-				return(NULL);
+				return (NULL);
 			}
 			free(tmp);
 			return (sdup);

@@ -45,5 +45,6 @@ void print_env(void);
 int interactive_mode(char *av);
 int advnce_exit(char *buffer, char *av);
 int _atoi(char *s);
-int berror_exit(int count,char *n, char *av);
+int berror_exit(int count, char *n, char *av);
+
 #endif

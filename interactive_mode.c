@@ -1,7 +1,5 @@
 #include "main.h"
 
-
-
 int interactive_mode(char *av)
 {
 	char *buffer = NULL, **s = NULL;
@@ -68,7 +66,7 @@ int interactive_mode(char *av)
 			}
 		}
 		if (WIFEXITED(status_exit))
-			status = WEXITSTATUS(status_exit);	
+			status = WEXITSTATUS(status_exit);
 		if (status != 0)
 		{
 			free_grid(s);

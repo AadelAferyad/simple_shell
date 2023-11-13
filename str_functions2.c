@@ -34,12 +34,14 @@ int _strcmp(char *src, char *dest)
 /**
  * _strcmp_echo - Compare a string with the "echo" command.
  * @dest: The string to compare with the "echo" command.
+ * @src: The string.
  * Return: 1 if @dest is equal to "echo", 0 otherwise.
  */
 int _strcmp_echo(char *dest, char *src)
 {
 	int i = 0, j = 0;
-	if (!src)/*"env env, exittt"*/
+
+	if (!src) /*"env env, exittt"*/
 		src = "echo";
 	for (; src[i]; i++)
 	{
