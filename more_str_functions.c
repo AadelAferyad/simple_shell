@@ -1,6 +1,24 @@
 #include "main.h"
+/**
+ * _strlen - count length of string
+ * @str: pointer to char
+ * Return: return the length
+ */
+int _strlen(char *str)
+{
+	int len = 0;
 
-int _strcmp(char *src, char *dest) /* "exit" exit*/
+	while (str[len])
+		len++;
+	return (len);
+}
+/**
+ * _strcmp - compare two strings
+ * @src: first string
+ * @dest: second string
+ * Return: comparaison result
+ */
+int _strcmp(char *src, char *dest)
 {
 	int i = 0;
 
@@ -13,11 +31,16 @@ int _strcmp(char *src, char *dest) /* "exit" exit*/
 	}
 	return ((src[i] == dest[i]) ? 1 : 0);
 }
-
+/**
+ * _strcmp_echo - Compare a string with the "echo" command.
+ * @dest: The string to compare with the "echo" command.
+ * Return: 1 if @dest is equal to "echo", 0 otherwise.
+ */
 int _strcmp_echo(char *dest)
 {
 	int i = 0;
 	char *s = "echo";
+
 	for (; s[i] && dest[i]; i++)
 	{
 		if (s[i] != dest[i])
@@ -25,7 +48,11 @@ int _strcmp_echo(char *dest)
 	}
 	return ((s[i] == '\0') ? 1 : 0);
 }
-
+/**
+ * _strdup - function that allocates a block of memory and initialize it.
+ * @buffer: string will be coppied to the allocated memory.
+ * Return: return allocated memory.
+ */
 char *_strdup(char *buffer)
 {
 	char *new;
@@ -42,7 +69,12 @@ char *_strdup(char *buffer)
 	new[i] = '\0';
 	return (new);
 }
-
+/**
+ * _strtok - Tokenize a string using specified delimiters.
+ * @str: The string to tokenize.
+ * @dahawmitr: The delimiters used for tokenization.
+ * Return: pointer to the next token or NULL if no more tokens are found.
+ */
 char *_strtok(char *str, char *dahawmitr)
 {
 	static char *buffer;
@@ -62,7 +94,6 @@ char *_strtok(char *str, char *dahawmitr)
 	}
 	token = buffer;
 	agadir = buffer;
-
 	while (*agadir != '\0')
 	{
 		if (_strchr(dahawmitr, *agadir) != NULL)
@@ -73,7 +104,6 @@ char *_strtok(char *str, char *dahawmitr)
 		}
 		agadir++;
 	}
-
 	buffer = NULL;
 	return (token);
 }

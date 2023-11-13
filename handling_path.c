@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * real_path - Resolve the real path of a command in the system.
+ * @buffer: The command to resolve.
+ * @faild: A pointer to an integer indicating failure (1) or success (0).
+ * Return: A dynamically allocated string with the resolved path, or the
+ *         original buffer if the command is not found.
+ */
 char *real_path(char **buffer, int *faild)
 {
 	char *tok, *path, *brutforce;
@@ -15,7 +21,7 @@ char *real_path(char **buffer, int *faild)
 		return (*buffer);
 	}
 	tok = _strtok(path, ":");
-	len = _strlen(*buffer);/*"ls/"*/
+	len = _strlen(*buffer); /*"ls/"*/
 	while (tok)
 	{
 		brutforce = malloc(len + 2 + _strlen(tok));
@@ -45,7 +51,11 @@ char *real_path(char **buffer, int *faild)
 		*faild = 1;
 	return (*buffer);
 }
-
+/**
+ * _getenvi - Get the value of an environment variable.
+ * Return: with the value of the environment variable
+ *         or NULL if the variable is not found or has an empty value.
+ */
 char *_getenvi()
 {
 	char *tmp, *tok, *envvalue, *sdup, *envv;
@@ -65,7 +75,7 @@ char *_getenvi()
 			{
 				free(tmp);
 				free(sdup);
-				return(NULL);
+				return (NULL);
 			}
 			free(tmp);
 			return (sdup);
@@ -75,7 +85,9 @@ char *_getenvi()
 	}
 	return (NULL);
 }
-
+/**
+ * print_env - Print the environment variables to STDOUT.
+ */
 void print_env(void)
 {
 	size_t length;

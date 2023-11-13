@@ -1,5 +1,9 @@
 #include "main.h"
-
+/**
+ * count_words_echo - Count the number of words in "echo".
+ * @buffer: The input string containing the "echo" command.
+ * Return: The number of words in the "echo" command string.
+ */
 int count_words_echo(char *buffer)
 {
 	int i = 0, words = 0;
@@ -20,7 +24,12 @@ int count_words_echo(char *buffer)
 	}
 	return (words);
 }
-
+/**
+ * alloc_words_echo - Allocate memory for a word in an "echo".
+ * @buffer: The input buffer containing the "echo".
+ * @index_buffer: Pointer to the index in the buffer.
+ * Return: A pointer to the allocated memory for a word in the "echo".
+ */
 char *alloc_words_echo(char *buffer, int *index_buffer)
 {
 	char *s;

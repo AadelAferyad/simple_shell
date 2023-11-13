@@ -1,5 +1,10 @@
 #include "main.h"
-
+/**
+ * skip_space_tab_for_berror - Skip leading spaces and tabs in a buffer.
+ * @buffer: The input buffer containing the string.
+ * Return: A new string starting from the first non-space, non-tab character,
+ *         or NULL if the buffer is empty or contains only spaces and tabs.
+ */
 char *skip_space_tab_for_berror(char *buffer)
 {
 	int i = 0, count = 0, is = -1, j, k = 0;
