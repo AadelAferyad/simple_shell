@@ -1,8 +1,10 @@
 #include "main.h"
 
+
+
 int interactive_mode(char *av)
 {
-	char *buffer = NULL, **s = NULL, *val = NULL, *value = NULL;
+	char *buffer = NULL, **s = NULL;
 	size_t len = 0;
 	int get_line, status = 0, count = 0, is, status_exit = 0;
 	pid_t child_p = 0;
@@ -10,7 +12,7 @@ int interactive_mode(char *av)
 
 	while (1)
 	{
-		write(STDOUT_FILENO, "#camel$ ", 8);
+		write(STDOUT_FILENO, "#marvel$ ", 9);
 		is = 0;
 		get_line = getline(&buffer, &len, stdin); /*Buffer allocated*/
 		count++;
@@ -24,27 +26,18 @@ int interactive_mode(char *av)
 			continue;
 		if (buffer[get_line - 1] == '\n')
 			buffer[get_line - 1] = '\0';
-		if (_strcmp(buffer, "exit"))
+		if ((e = _strcmp_exit(buffer)) > 0)
 		{
+			if (e == 2)
+				exit_s = advnce_exit(buffer, av[0]);
+			if (e == 3)
+				exit_s = berror_exit(1, &buffer[5], av[0]);
 			free(buffer);
-			return (0);
+			return (exit_s);
 		}
-		if (_strcmp(buffer, "env"))
+		if (_strcmp_echo(buffer, "env"))
 		{
 			print_env();
-			continue;
-		}
-		if (_strncmp(buffer, "setenv", 6) == 0)
-		{
-			val = strtok(buffer + 7, " ");
-			value = strtok(NULL, " ");
-			_setenv(val, value);
-			continue;
-		}
-		if (_strncmp(buffer, "unsetenv", 8) == 0)
-		{
-			val = strtok(buffer + 9, " ");
-			_unsetenv(val);
 			continue;
 		}
 		if (!(s = allocate_argv_and_set(buffer, NULL)))
@@ -75,7 +68,7 @@ int interactive_mode(char *av)
 			}
 		}
 		if (WIFEXITED(status_exit))
-			status = WEXITSTATUS(status_exit);
+			status = WEXITSTATUS(status_exit);	
 		if (status != 0)
 		{
 			free_grid(s);

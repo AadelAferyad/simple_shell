@@ -23,8 +23,7 @@ void free_grid(char **s);
 /*============================ STR functions =============================*/
 int _strlen(char *str);
 int _strcmp(char *src, char *dest);
-int _strcmp_echo(char *dest);
-int _strncmp(char *s1, char *s2, int n);
+int _strcmp_echo(char *dest, char *src);
 char *skip_space_tab_for_berror(char *buffer);
 char *_strtok(char *str, char *dahawmitr);
 char *_strdup(char *buffer);
@@ -35,16 +34,16 @@ int berror(int count, char *buffer, char *av);
 void _putchar(char c);
 void _puts(char *str);
 void print_int(unsigned int n);
+int _strcmp_exit(char *dest);
 /*======================== End of STR functions ==========================*/
 
 /*============================ path functions =============================*/
 char *real_path(char **buffer, int *faild);
 char *_getenvi();
-int _setenv(char *val, char *value);
-int _unsetenv(char *name);
 void print_env(void);
 /*======================== End of path functions ==========================*/
 int interactive_mode(char *av);
-int non_interactive_mode(char *av);
-
+int advnce_exit(char *buffer, char *av);
+int _atoi(char *s);
+int berror_exit(int count,char *n, char *av);
 #endif

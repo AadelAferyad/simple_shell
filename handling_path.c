@@ -21,7 +21,7 @@ char *real_path(char **buffer, int *faild)
 		return (*buffer);
 	}
 	tok = _strtok(path, ":");
-	len = _strlen(*buffer); /*"ls/"*/
+	len = _strlen(*buffer);/*"ls/"*/
 	while (tok)
 	{
 		brutforce = malloc(len + 2 + _strlen(tok));
@@ -51,11 +51,13 @@ char *real_path(char **buffer, int *faild)
 		*faild = 1;
 	return (*buffer);
 }
+
 /**
  * _getenvi - Get the value of an environment variable.
  * Return: with the value of the environment variable
  *         or NULL if the variable is not found or has an empty value.
  */
+
 char *_getenvi()
 {
 	char *tmp, *tok, *envvalue, *sdup, *envv;
@@ -75,7 +77,7 @@ char *_getenvi()
 			{
 				free(tmp);
 				free(sdup);
-				return (NULL);
+				return(NULL);
 			}
 			free(tmp);
 			return (sdup);
@@ -85,6 +87,7 @@ char *_getenvi()
 	}
 	return (NULL);
 }
+
 /**
  * print_env - Print the environment variables to STDOUT.
  */

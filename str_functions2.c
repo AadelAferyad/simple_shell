@@ -36,17 +36,28 @@ int _strcmp(char *src, char *dest)
  * @dest: The string to compare with the "echo" command.
  * Return: 1 if @dest is equal to "echo", 0 otherwise.
  */
-int _strcmp_echo(char *dest)
+int _strcmp_echo(char *dest, char *src)
 {
-	int i = 0;
-	char *s = "echo";
-
-	for (; s[i] && dest[i]; i++)
+	int i = 0, j = 0;
+	if (!src)/*"env env, exittt"*/
+		src = "echo";
+	for (; src[i]; i++)
 	{
-		if (s[i] != dest[i])
+		if (src[i] != dest[i])
 			return (0);
 	}
-	return ((s[i] == '\0') ? 1 : 0);
+	if (dest[i] != '\0')
+	{
+		j = i;
+		while (dest[j])
+		{
+			if (src[i] == '\0' && (dest[j] == 32 || dest[j] == 9))
+				j++;
+			else
+				return (0);
+		}
+	}
+	return (1);
 }
 /**
  * _strdup - function that allocates a block of memory and initialize it.

@@ -8,7 +8,7 @@ int count_words(char *buffer)
 {
 	int words = 0, i = 0;
 
-	if (_strcmp_echo(buffer))
+	if (_strcmp_echo(buffer, NULL))
 		return (count_words_echo(buffer));
 	if (buffer[0] != 32)
 		words++;
