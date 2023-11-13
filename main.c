@@ -1,18 +1,15 @@
 #include "main.h"
 
-
-
-
 int main(int ac, char **av)
 {
 	int status = 0, p = 0, is = 0, exit_s = 0, get_line = 0, is_f = -1;
 	pid_t child_p = 0;
-	char  **s = NULL, *buffer = NULL;
+	char **s = NULL, *buffer = NULL, *val = NULL, *value = NULL;
 	struct stat st;
 	size_t len = 0;
 
-    if (isatty(STDIN_FILENO) != 0)
-			return (interactive_mode(av[0]));
+	if (isatty(STDIN_FILENO) != 0)
+		return (interactive_mode(av[0]));
 	while (1)
 	{
 		get_line = getline(&buffer, &len, stdin);
@@ -23,17 +20,29 @@ int main(int ac, char **av)
 			exit(0);
 		}
 		if (buffer[_strlen(buffer) - 1] == '\n')
-				buffer[_strlen(buffer) - 1] = '\0';
+			buffer[_strlen(buffer) - 1] = '\0';
 		if (_strcmp(buffer, "exit"))
-        {
-            free(buffer);
+		{
+			free(buffer);
 			return (0);
-        }
+		}
 		if (_strcmp(buffer, "env"))
 		{
 			print_env();
-            free(buffer);
-			return (0);
+			continue;
+		}
+		if (strncmp(buffer, "setenv", 6) == 0)
+		{
+			val = strtok(buffer + 7, " ");
+			value = strtok(NULL, " ");
+			_setenv(val, value);
+			continue;
+		}
+		if (strncmp(buffer, "unsetenv", 8) == 0)
+		{
+			val = strtok(buffer + 9, " ");
+			_unsetenv(val);
+			continue;
 		}
 		if (!(s = allocate_argv_and_set(buffer, &is_f)))
 		{
@@ -44,8 +53,8 @@ int main(int ac, char **av)
 			}
 			if (is_f == 0)
 			{
-				free(buffer);/*ne contineu here be careful*/
-				return(0);
+				free(buffer); /*ne contineu here be careful*/
+				return (0);
 			}
 		}
 		if (stat(s[0], &st) == -1)
@@ -90,4 +99,3 @@ int main(int ac, char **av)
 	}
 	return (status);
 }
-

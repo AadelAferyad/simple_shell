@@ -39,8 +39,11 @@ void print_int(unsigned int n);
 /*============================ path functions =============================*/
 char *real_path(char **buffer, int *faild);
 char *_getenvi();
+int _setenv(char *val, char *value);
+int _unsetenv(char *name);
 void print_env(void);
 /*======================== End of path functions ==========================*/
 int interactive_mode(char *av);
 int non_interactive_mode(char *av);
+
 #endif

@@ -1,10 +1,8 @@
 #include "main.h"
 
-
-
 int interactive_mode(char *av)
 {
-	char *buffer = NULL, **s = NULL;
+	char *buffer = NULL, **s = NULL, *val = NULL, *value = NULL;
 	size_t len = 0;
 	int get_line, status = 0, count = 0, is, status_exit = 0;
 	pid_t child_p = 0;
@@ -34,8 +32,20 @@ int interactive_mode(char *av)
 		if (_strcmp(buffer, "env"))
 		{
 			print_env();
-			free(buffer);
-			return (0);
+			continue;
+		}
+		if (strncmp(buffer, "setenv", 6) == 0)
+		{
+			val = strtok(buffer + 7, " ");
+			value = strtok(NULL, " ");
+			_setenv(val, value);
+			continue;
+		}
+		if (strncmp(buffer, "unsetenv", 8) == 0)
+		{
+			val = strtok(buffer + 9, " ");
+			_unsetenv(val);
+			continue;
 		}
 		if (!(s = allocate_argv_and_set(buffer, NULL)))
 		{
@@ -65,7 +75,7 @@ int interactive_mode(char *av)
 			}
 		}
 		if (WIFEXITED(status_exit))
-			status = WEXITSTATUS(status_exit);	
+			status = WEXITSTATUS(status_exit);
 		if (status != 0)
 		{
 			free_grid(s);
