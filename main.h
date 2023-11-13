@@ -49,5 +49,4 @@ int _atoi(char *s);
 int berror_exit(int count, char *n, char *av);
 int _strcmp_exit(char *dest);
 
-
 #endif

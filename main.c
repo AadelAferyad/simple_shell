@@ -1,5 +1,12 @@
 #include "main.h"
-
+/**
+ * main - Entry point for the custom shell program.
+ * @ac: The number of command-line arguments.
+ * @av: An array of strings representing the command-line arguments.
+ *
+ * Return: 0 on successful execution,
+ *  or an exit status indicating an error.
+ */
 int main(int ac, char **av)
 {
 	int status = 0, is = 0, exit_s = 0, get_line = 0, is_f = -1;

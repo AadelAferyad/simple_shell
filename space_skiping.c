@@ -1,5 +1,12 @@
 #include "main.h"
-
+/**
+ * skip_space_tab_for_berror - Skips leading spaces
+ * and tabs in a string.
+ * @buffer: Input string.
+ *
+ * Return: newly allocated string without leading spaces and tabs,
+ *  or NULL if allocation fails.
+ */
 char *skip_space_tab_for_berror(char *buffer)
 {
 	int i = 0, count = 0, is = -1, j, k = 0;
@@ -31,10 +38,17 @@ char *skip_space_tab_for_berror(char *buffer)
 	temp[k] = '\0';
 	return (temp);
 }
-
+/**
+ * advnce_exit - Handles "exit" command with additional arguments.
+ * @buffer: Input string containing the "exit" and arguments.
+ * @av: Command-line arguments.
+ *
+ * Return: The exit status specified in the command,
+ *  or 2 if there is an error.
+ */
 int advnce_exit(char *buffer, char *av)
 {
-	int i = 0;/*exit */
+	int i = 0; /*exit */
 	char *tmp = NULL;
 
 	tmp = _strdup(&buffer[5]);
@@ -48,11 +62,19 @@ int advnce_exit(char *buffer, char *av)
 	free(tmp);
 	return (i);
 }
-
+/**
+ * _strcmp_exit - Compares a string with the "exit" command.
+ * @dest: Input string to be compared with "exit".
+ *
+ * Return: 0 if not equal, 1 if equal,
+ *  2 if "exit" with numeric argument,
+ *  3 if "exit" with alphabetic argument.
+ */
 int _strcmp_exit(char *dest)
 {
 	int i = 0, j = 0;
 	char *src;
+
 	src = "exit";
 	for (; src[i]; i++)
 	{
@@ -66,11 +88,14 @@ int _strcmp_exit(char *dest)
 		{
 			if (src[i] == '\0' && (dest[j] == 32 || dest[j] == 9))
 				j++;
-			else if (src[i] == '\0' && ((dest[j] >= 48 && dest[j] <= 57 && dest[j - 1] == 32) || dest[j] == '-'))
+			else if (src[i] == '\0' && ((dest[j] >= 48 && dest[j] <= 57 &&
+					dest[j - 1] == 32) || dest[j] == '-'))
 				return (2);
-			else if (src[i] == '\0' && ((dest[j] >= 'A' && dest[j] <= 'Z' && dest[j - 1] == 32)))
+			else if (src[i] == '\0' && ((dest[j] >= 'A' &&
+					dest[j] <= 'Z' && dest[j - 1] == 32)))
 				return (3);
-			else if (src[i] == '\0' && ((dest[j] >= 'a' && dest[j] <= 'z' && dest[j - 1] == 32)))
+			else if (src[i] == '\0' && ((dest[j] >= 'a' &&
+					dest[j] <= 'z' && dest[j - 1] == 32)))
 				return (3);
 			else
 				return (0);
@@ -78,7 +103,13 @@ int _strcmp_exit(char *dest)
 	}
 	return (1);
 }
-
+/**
+ * _atoi - Converts a string to an integer.
+ * @s: Input string.
+ *
+ * Return: The integer value of the string,
+ *  or -1 on error.
+ */
 int _atoi(char *s)
 {
 	int i = 0;
@@ -104,7 +135,7 @@ int _atoi(char *s)
 			h = h * 10 + (int)s[i] - 48;
 			bool = 1;
 		}
-		if (negative % 2  == 0)
+		if (negative % 2 == 0)
 		{
 			sign = 1;
 		}
@@ -118,9 +149,16 @@ int _atoi(char *s)
 	}
 	return ((h == 0) ? -1 : h * sign);
 }
-
-
-int berror_exit(int count,char *n, char *av)
+/**
+ * berror_exit - Handles error messages for the "exit" .
+ * @count: Error count.
+ * @n: Numeric argument causing the error.
+ * @av: Command-line arguments.
+ *
+ * Return: 1 if memory allocation fails,
+ *  2 if exit command error.
+ */
+int berror_exit(int count, char *n, char *av)
 {
 	char *tmp = skip_space_tab_for_berror(n);
 

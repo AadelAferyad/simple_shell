@@ -1,6 +1,14 @@
 #include "main.h"
-
-
+/**
+ * new_pro - Creates a new process to execute a command.
+ * @s: Double pointer to the command and its arguments.
+ * @buffer: Pointer to the input buffer.
+ * @av: Command-line arguments.
+ *
+ * Return: 0 on successful execution,
+ *  127 on command not found,
+ *  or exit status on error.
+ */
 int new_pro(char ***s, char **buffer, char *av)
 {
 	pid_t child_p = 0;

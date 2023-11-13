@@ -1,6 +1,12 @@
 #include "main.h"
-
-
+/**
+ * redirector - Redirects input based on the provided buffer content.
+ * @buffer: Double pointer to the input buffer.
+ * @get_line: Flag indicating if a new line is obtained.
+ * @av: Command-line arguments.
+ * Return: 0 if get_line is -1, 1 if buffer contains only '\n',
+ *         -1 on error.
+ */
 int redirector(char **buffer, int get_line, char *av)
 {
 	int e = 0, exit_s = 0;
@@ -19,8 +25,8 @@ int redirector(char **buffer, int get_line, char *av)
 		print_env();
 		return (1);
 	}
-
-	if ((e = _strcmp_exit(*buffer)) > 0)
+	e = _strcmp_exit(*buffer);
+	if (e > 0)
 	{
 		if (e == 2)
 			exit_s = advnce_exit(*buffer, av);
@@ -31,7 +37,14 @@ int redirector(char **buffer, int get_line, char *av)
 	}
 	return (-1);
 }
-
+/**
+ * allocat_faild - Handles memory allocation failure.
+ * @s: Double pointer to a string.
+ * @buffer: Pointer to the input buffer.
+ * @is_f: Integer flag indicating the type of failure.
+ * Return: -1 on allocation failure, 0 on normal failure,
+ *  2 on successful allocation.
+ */
 int allocat_faild(char ***s, char **buffer, int is_f)
 {
 
@@ -50,12 +63,20 @@ int allocat_faild(char ***s, char **buffer, int is_f)
 	}
 	return (2);
 }
-
-
+/**
+ * path_faild - Handles failure related to the file path.
+ * @buffer: Pointer to the input buffer.
+ * @s: Double pointer to a string.
+ * @av: Command-line arguments.
+ *
+ * Return: 0 if the file path does not exist,
+ *  -1 on successful path, 127 on error.
+ */
 int path_faild(char **buffer, char ***s, char *av)
 {
 	int is = 0, p = 0;
 	struct stat st;
+
 	if (stat(*s[0], &st) == -1)
 	{
 		*s[0] = real_path(&(*s[0]), &p);
