@@ -34,14 +34,14 @@ int interactive_mode(char *av)
 			print_env();
 			continue;
 		}
-		if (strncmp(buffer, "setenv", 6) == 0)
+		if (_strncmp(buffer, "setenv", 6) == 0)
 		{
 			val = strtok(buffer + 7, " ");
 			value = strtok(NULL, " ");
 			_setenv(val, value);
 			continue;
 		}
-		if (strncmp(buffer, "unsetenv", 8) == 0)
+		if (_strncmp(buffer, "unsetenv", 8) == 0)
 		{
 			val = strtok(buffer + 9, " ");
 			_unsetenv(val);

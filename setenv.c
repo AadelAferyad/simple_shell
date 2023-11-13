@@ -6,21 +6,15 @@ int _setenv(char *var, char *value)
     char *newkey = NULL, **newenviron = NULL;
 
     if (!var || !value)
-    {
         return (-1);
-    }
     while (environ[envlen] != NULL)
-    {
         envlen++;
-    }
     newenviron = malloc(sizeof(char *) * (envlen + 2));
     if (newenviron == NULL)
-    {
         return (-1);
-    }
     for (; environ[i] != NULL; i++)
     {
-        if (_strcmp(environ[i], var) == 0)
+        if (_strncmp(environ[i], var, strlen(var)) == 0)
         {
             newkey = malloc(_strlen(var) + _strlen(value) + 2);
             if (newkey == NULL)

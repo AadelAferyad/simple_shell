@@ -24,6 +24,7 @@ void free_grid(char **s);
 int _strlen(char *str);
 int _strcmp(char *src, char *dest);
 int _strcmp_echo(char *dest);
+int _strncmp(char *s1, char *s2, int n);
 char *skip_space_tab_for_berror(char *buffer);
 char *_strtok(char *str, char *dahawmitr);
 char *_strdup(char *buffer);
