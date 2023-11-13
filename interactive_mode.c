@@ -4,7 +4,7 @@ int interactive_mode(char *av)
 {
 	char *buffer = NULL, **s = NULL;
 	size_t len = 0;
-	int get_line, status = 0, count = 0, is, status_exit = 0;
+	int get_line, status = 0, count = 0, is, status_exit = 0, exit_s = 0, e = 0;
 	pid_t child_p = 0;
 	struct stat st;
 
@@ -27,9 +27,9 @@ int interactive_mode(char *av)
 		if ((e = _strcmp_exit(buffer)) > 0)
 		{
 			if (e == 2)
-				exit_s = advnce_exit(buffer, av[0]);
+				exit_s = advnce_exit(buffer, av);
 			if (e == 3)
-				exit_s = berror_exit(1, &buffer[5], av[0]);
+				exit_s = berror_exit(1, &buffer[5], av);
 			free(buffer);
 			return (exit_s);
 		}
