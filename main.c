@@ -13,6 +13,7 @@ int main(int ac, char **av)
 	char **s = NULL, *buffer = NULL;
 	size_t len = 0;
 
+	(void) ac;
 	if (isatty(STDIN_FILENO) != 0)
 		return (interactive_mode(av[0]));
 	while (1)
