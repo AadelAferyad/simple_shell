@@ -26,9 +26,7 @@ int interactive_mode(char *av)
 			return (exit_s);
 		is = path_faild(&buffer, &s, av, count, 0);
 		if (is != -1)
-		{
 			continue;
-		}
 		status = new_pro(&s, &buffer, av, count);
 		if (status != -1)
 			continue;
