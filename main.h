@@ -19,9 +19,7 @@ char **allocate_argv_and_set(char *buffer, int *f);
 char *cut_the_first_word(char *buffer);
 void free_grid(char **s);
 /*======================= End of memory functions ========================*/
-int redirector(char **buffer, int get_line, char *av);
 int allocat_faild(char ***s, char **buffer, int is_f);
-int path_faild(char **buffer, char ***s, char *av);
 /*============================ STR functions =============================*/
 int _strlen(char *str);
 int _strcmp(char *src, char *dest);
@@ -33,15 +31,17 @@ char *_strchr(char *s, char c);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 int berror(int count, char *buffer, char *av);
+int redirector(char **buffer, int get_line, char *av, int c, int i);
 void _putchar(char c);
 void _puts(char *str);
 void print_int(unsigned int n);
 /*======================== End of STR functions ==========================*/
-int new_pro(char ***s, char **buffer, char *av);
+int new_pro(char ***s, char **buffer, char *av, int c);
 /*============================ path functions =============================*/
 char *real_path(char **buffer, int *faild);
 char *_getenvi();
 void print_env(void);
+int path_faild(char **buffer, char ***s, char *av, int c, int i);
 /*======================== End of path functions ==========================*/
 int interactive_mode(char *av);
 int advnce_exit(char *buffer, char *av);

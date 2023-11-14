@@ -8,46 +8,46 @@
  */
 char *real_path(char **buffer, int *faild)
 {
-    char *tok, *path, *brutforce;
-    int found = 0, len;
+	char *tok, *path, *brutforce;
+	int found = 0, len;
 
-    if (!buffer || !(*buffer))
-        return (NULL);
-    path = _getenvi();
-    if (!path)
-    {
-        if (faild)
-            *faild = 1;
-        return (*buffer);
-    }
-    tok = _strtok(path, ":");
-    len = _strlen(*buffer); /*"ls/"*/
-    while (tok)
-    {
-        brutforce = malloc(len + 2 + _strlen(tok));
-        if (!brutforce)
-        {
-            free(path);
-            if (faild)
-                *faild = 1;
-            exit(EXIT_FAILURE);
-        }
-        _strcpy(brutforce, tok);
-        _strcat(brutforce, "/");
-        _strcat(brutforce, *buffer);
-        if (access(brutforce, X_OK) == 0)
-            found = 1;
-        if (found)
-        {
-            free(*buffer);
-            free(path);
-            return (brutforce);
-        }
-        free(brutforce);
-        tok = _strtok(NULL, ":");
-    }
-    free(path);
-    return (found ? (free(*buffer), brutforce) : ((*faild = 1), *buffer));
+	if (!buffer || !(*buffer))
+		return (NULL);
+	path = _getenvi();
+	if (!path)
+	{
+		if (faild)
+			*faild = 1;
+		return (*buffer);
+	}
+	tok = _strtok(path, ":");
+	len = _strlen(*buffer); /*"ls/"*/
+	while (tok)
+	{
+		brutforce = malloc(len + 2 + _strlen(tok));
+		if (!brutforce)
+		{
+			free(path);
+			if (faild)
+				*faild = 1;
+			exit(EXIT_FAILURE);
+		}
+		_strcpy(brutforce, tok);
+		_strcat(brutforce, "/");
+		_strcat(brutforce, *buffer);
+		if (access(brutforce, X_OK) == 0)
+			found = 1;
+		if (found)
+		{
+			free(*buffer);
+			free(path);
+			return (brutforce);
+		}
+		free(brutforce);
+		tok = _strtok(NULL, ":");
+	}
+	free(path);
+	return (found ? (free(*buffer), brutforce) : ((*faild = 1), *buffer));
 }
 /**
  * _getenvi - Get the value of an environment variable.

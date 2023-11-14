@@ -4,13 +4,17 @@
  * @buffer: Double pointer to the input buffer.
  * @get_line: Flag indicating if a new line is obtained.
  * @av: Command-line arguments.
+ * @c: count.
+ * @i: for interactive mode should i free or not.
  * Return: 0 if get_line is -1, 1 if buffer contains only '\n',
- *         -1 on error.
+ * -1 on error.
  */
-int redirector(char **buffer, int get_line, char *av)
+int redirector(char **buffer, int get_line, char *av, int c, int i)
 {
 	int e = 0, exit_s = 0;
 
+	if (c == 0)
+		c = 1;
 	if (get_line == -1)
 	{
 		free(*buffer), write(0, "\n", 1);
@@ -31,8 +35,9 @@ int redirector(char **buffer, int get_line, char *av)
 		if (e == 2)
 			exit_s = advnce_exit(*buffer, av);
 		if (e == 3)
-			exit_s = berror_exit(1, *buffer + 5, av);
-		free(*buffer);
+			exit_s = berror_exit(c, *buffer + 5, av);
+		if (i)
+			free(*buffer);
 		return (exit_s);
 	}
 	return (-1);
@@ -68,21 +73,26 @@ int allocat_faild(char ***s, char **buffer, int is_f)
  * @buffer: Pointer to the input buffer.
  * @s: Double pointer to a string.
  * @av: Command-line arguments.
- *
+ * @c: count.
+ * @i: for interactive mode should i free or not.
  * Return: 0 if the file path does not exist,
  *  -1 on successful path, 127 on error.
  */
-int path_faild(char **buffer, char ***s, char *av)
+int path_faild(char **buffer, char ***s, char *av, int c, int i)
 {
 	int is = 0, p = 0;
 	struct stat st;
 
+	if (c == 0)
+		c = 1;
 	if (stat(*s[0], &st) == -1)
 	{
 		*s[0] = real_path(&(*s[0]), &p);
 		if (p)
 		{
-			is = berror(1, *buffer, av), free_grid(*s), free(*buffer);
+			is = berror(c, *buffer, av), free_grid(*s);
+			if (i)
+				free(*buffer);
 			if (is)
 				return (0);
 			else
